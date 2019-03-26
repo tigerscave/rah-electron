@@ -1,0 +1,19 @@
+{
+  "name": "first-electron-app",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "server": "node server.js"
+  },
+  "author": "rahmat",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.1.1"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
