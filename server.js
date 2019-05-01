@@ -12,15 +12,15 @@ server.listen(port, () => {
     console.log('Server running ...', port);
 })
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'src')))
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/src/index.html');
-});
-
-app.get('/handleDom.js', (req, res) => {
-    res.sendFile(__dirname + '/src/handleDom.js');
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/src/index.html');
+// });
+//
+// app.get('/handleDom.js', (req, res) => {
+//     res.sendFile(__dirname + '/src/handleDom.js');
+// });
 
 io.on('connection', (socket) => {
 

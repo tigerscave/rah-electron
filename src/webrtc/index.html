@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>receiver</title>
+</head>
+<body>
+
+<div>
+  <h2><a href="../index.html">BACK</a></h2>
+  <h1>receiver</h1>
+  <p>Your socketId is <strong id="socketId"></strong></p>
+</div>
+<div>
+  <video
+      id="remoteVideo"
+      playsinline
+      autoplay
+      width="300px"
+      muted></video>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="receiver.js"></script>
+</body>
+</html>
