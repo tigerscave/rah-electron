@@ -6,7 +6,8 @@ const io = require('socket.io')(server);
 
 const port = process.env.PORT || 3000;
 
-connections = [];
+let connections = [];
+let users = []
 
 server.listen(port, () => {
     console.log('Server running ...', port);
@@ -14,22 +15,16 @@ server.listen(port, () => {
 
 app.use(express.static(path.join(__dirname, 'src')))
 
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/src/index.html');
-// });
-//
-// app.get('/handleDom.js', (req, res) => {
-//     res.sendFile(__dirname + '/src/handleDom.js');
-// });
-
 io.on('connection', (socket) => {
 
     connections.push(socket);
-    console.log('connected: %s sockets connected', connections.length)
-
+    users.push(socket);
+    console.log('connected: %s sockets connected', connections.length, users)
+    
     // Disconnect
     socket.on('disconnect', () => {
         connections.splice(connections.indexOf(socket), 1);
+        users.filter(user => user !== socket.id);
         console.log('Disconnected: %s sockets connected', connections.length);
     });
 
