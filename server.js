@@ -13,10 +13,9 @@ server.listen(port, () => {
     console.log('Server running ...', port);
 })
 
-app.use(express.static(path.join(__dirname, 'src')))
+app.use(express.static('src'))
 
 io.on('connection', (socket) => {
-
     connections.push(socket);
     users.push(socket);
     console.log('connected: %s sockets connected', connections.length, users)

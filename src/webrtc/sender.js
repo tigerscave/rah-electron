@@ -1,6 +1,8 @@
 'use strict';
-const io = require('socket.io-client');
-const socket = io(process.env.SIGNALING_SERVER);
+ // const io = require('socket.io-client');
+// const socket = io(process.env.SIGNALING_SERVER);
+const socket = io('http://localhost:3000/', { forceNew: true });
+
 
 socket.on('connect', () => {
   document.getElementById('socketId').innerText = socket.id;
