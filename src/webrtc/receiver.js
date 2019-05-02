@@ -1,4 +1,5 @@
 'use strict';
+const { ipcRenderer } = require('electron');
 
 const socket = io('http://localhost:3100', { forceNew: true });
 console.log(socket)
@@ -26,7 +27,8 @@ const handleOnTrackConnection = event => {
 const handleMessageReceived = event => {
   const { data } = event;
   console.log(data)
-  console.log(JSON.parse(data))
+  ipcRenderer.send('turn-on')
+
 }
 
 const handleDataChannel = event => {
@@ -60,3 +62,10 @@ socket.on('offerToReceiver', data => {
     })
 })
 
+const onTurnOnOff = () => {
+  ipcRenderer.send('turn-on')
+  console.log('clicked me')
+}
+
+const turnOnOff = document.getElementById('turnOnOff')
+turnOnOff.addEventListener('click', onTurnOnOff)

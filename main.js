@@ -1,10 +1,13 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+const five = require('johnny-five');
 
 const { app, BrowserWindow, ipcMain } = electron;
 
 let mainWindow
+
+let board = new five.Board();
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({});
@@ -37,6 +40,16 @@ app.on('ready', () => {
         });
       }
   })
+  
+  board.on('ready', () => {
+    let led = new five.Led(13)
+    ipcMain.on('turn-on', (event, arg) => {
+      console.log('---turn-on---')
+      console.log(event, arg)
+      led.on()
+    })
+  })
+  
 });
 
 
