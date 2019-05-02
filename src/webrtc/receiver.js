@@ -1,6 +1,7 @@
 'use strict';
 
-const socket = io('https://rah-webrtc.herokuapp.com', { forceNew: true });
+const socket = io('http://localhost:3100', { forceNew: true });
+console.log(socket)
 socket.on('connect', () => {
   document.getElementById('socketId').innerText = socket.id;
 })
@@ -24,10 +25,13 @@ const handleOnTrackConnection = event => {
 
 const handleMessageReceived = event => {
   const { data } = event;
+  console.log(data)
+  console.log(JSON.parse(data))
 }
 
 const handleDataChannel = event => {
   const { channel } = event;
+  console.log(channel)
   channel.addEventListener('message', handleMessageReceived);
 }
 
@@ -36,7 +40,7 @@ const createAnswer = (senderId, description) => {
   
   pc.setLocalDescription(description).then(() => {
     pc.addEventListener('track', handleOnTrackConnection);
-    pc.addEventListener('dataChannel', handleDataChannel);
+    pc.addEventListener('datachannel', handleDataChannel);
     
     socket.emit('answerFromReceiver', {
       description,
