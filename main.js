@@ -48,8 +48,11 @@ app.on('ready', () => {
       console.log(event, arg)
       led.on()
     })
+
+    ipcMain.on('turn-off', () => {
+      led.off()
+    })
   })
-  
 });
 
 

@@ -27,8 +27,19 @@ const handleOnTrackConnection = event => {
 const handleMessageReceived = event => {
   const { data } = event;
   console.log(data)
-  ipcRenderer.send('turn-on')
-
+  switch (data) {
+    case 'turn-on':
+      ipcRenderer.send('turn-on');
+      break
+    case 'turn-off':
+      ipcRenderer.send('turn-off');
+      break
+    default:
+      ipcRenderer.send('turn-off');
+  }
+  ipcRenderer.send('led', parsedData.shouldLedBlink);
+  
+//  ipcRenderer.send('turn-off')
 }
 
 const handleDataChannel = event => {
