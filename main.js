@@ -43,7 +43,9 @@ app.on('ready', () => {
   
   board.on('ready', () => {
     let led = new five.Led(13)
-    let servo = new five.Servo(5)
+    let servo3 = new five.Servo(3)
+    let servo5 = new five.Servo(5)
+    let servo6 = new five.Servo(6)
     
     ipcMain.on('turn-on', (event, arg) => {
       console.log('---turn-on---')
@@ -55,10 +57,20 @@ app.on('ready', () => {
       led.off()
     })
     
-    ipcMain.on('servo-to', (event, arg) => {
-       servo.to(arg);
+    ipcMain.on('servo-to3', (event, arg) => {
+       servo3.to(arg * 90 + 90);
       console.log('data is: ', arg)
-    })
+    });
+  
+    ipcMain.on('servo-to5', (event, arg) => {
+      servo5.to(arg * 90 + 90);
+      console.log('data is: ', arg)
+    });
+  
+    ipcMain.on('servo-to6', (event, arg) => {
+      servo6.to(arg * 90 + 90);
+      console.log('data is: ', arg)
+    });
   })
 });
 

@@ -26,20 +26,38 @@ const handleOnTrackConnection = event => {
 
 const handleMessageReceived = event => {
   const { data } = event;
-  ipcRenderer.send('servo-to', data)
-  console.log('Data: ', data)
- //console.log(data)
-  switch (data) {
-    case 'turn-on':
-      ipcRenderer.send('turn-on');
-      break;
-    case 'turn-off':
-      ipcRenderer.send('turn-off');
-      break;
-    default:
-      ipcRenderer.send('turn-off');
+  const gpData = JSON.parse(data)
+  console.log('message dat: ', gpData)
+  
+  if (gpData.gpAButton) {
+    ipcRenderer.send('turn-on');
+  } else if (gpData.gpBButton) {
+    ipcRenderer.send('turn-off');
+  } else if (gpData.gpAxes1) {
+    ipcRenderer.send('servo-to3', gpData.gpAxes1)
+  } else if (gpData.gpAxes2) {
+    ipcRenderer.send('servo-to5', gpData.gpAxes2)
+  } else if (gpData.gpAxes3) {
+    ipcRenderer.send('servo-to6', gpData.gpAxes3)
+  } else {
+ //   ipcRenderer.send('turn-off');
+    console.log('No Event')
   }
   
+ //  ipcRenderer.send('servo-to', data)
+ //  console.log('Data: ', data)
+ // //console.log(data)
+ //  switch (data) {
+ //    case 'turn-on':
+ //      ipcRenderer.send('turn-on');
+ //      break;
+ //    case 'turn-off':
+ //      ipcRenderer.send('turn-off');
+ //      break;
+ //    default:
+ //      ipcRenderer.send('turn-off');
+ //  }
+ 
 }
 
 const handleDataChannel = event => {
